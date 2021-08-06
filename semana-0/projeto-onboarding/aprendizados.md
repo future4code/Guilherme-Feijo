@@ -1,0 +1,2 @@
+# Aprendizados da semana
+Durante esta semana eu aprendi a utilizar o terminal no meu computador, vi o básico do que o VS Code faz e comecei a me familiarizar com o Git e o **GitHub**, porque ainda não posso dizer que realmente sei tudo sobre eles.
