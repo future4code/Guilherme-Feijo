@@ -4,8 +4,8 @@
 
 // a. false
 // b. false
-// c. false
-// d. undefined
+// c. true
+// d. boolean
 
 
 
@@ -61,10 +61,10 @@
 
 //EXERCÍCIO 4
 
-// let numero1 = Number(prompt("Escreva um número"))
-// let numero2 = Number(prompt("Escreva outro número"))
-// let divisao = (numero1 % numero2) === 0
-// let divisao2 = (numero2 % numero1) === 0
+//let numero1 = Number(prompt("Escreva um número"))
+//let numero2 = Number(prompt("Escreva outro número"))
+//let divisao = (numero1 % numero2) === 0
+//let divisao2 = (numero2 % numero1) === 0
 
 // console.log("O primeiro numero é maior que segundo? ", numero1>numero2)
 // console.log("O primeiro numero é igual ao segundo? ", numero1 === numero2)
