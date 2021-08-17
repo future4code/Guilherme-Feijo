@@ -102,103 +102,105 @@
 const nomeUsuarioPrompt = prompt("Qual o seu nome?")
 const tipoDeJogoPrompt = prompt("Você quer assistir a um jogo internacional ou doméstico? IN/DO").toLowerCase()
 const etapaDoJogoPrompt = prompt("Você quer ver uma semifinal, decisão de terceiro lugar ou final? SF/DT/FI").toLowerCase()
-const categoriaPrompt = prompt("Qual a categoria do ingresso que você quer comprar: 1, 2, 3 ou 4?")
+const categoriaPrompt = Number(prompt("Qual a categoria do ingresso que você quer comprar: 1, 2, 3 ou 4?"))
 const quantidadeDeIngressosPrompt = Number(prompt("Quantos ingressos você quer comprar?"))
 
-let ingressoSF
-let ingressoDT
-let ingressoFI
+let precoIngresso
 
 
-switch(categoriaPrompt){
-    case '1':
-        ingressoSF = 1320
-        break
-    case '2':
-        ingressoSF = 880
-        break
-    case '3':
-        ingressoSF = 550
-    case '4':
-        ingressoSF = 220
-        break
-}
+switch(etapaDoJogoPrompt){
+    case 'sf':
+        switch(categoriaPrompt){
+            case 1:
+                precoIngresso = 1320;
+                break;
+            case 2:
+                precoIngresso = 880;
+                break;
+            case 3:
+                precoIngresso = 550;
+                break;
+            case 4:
+                precoIngresso = 220;
+                break;
+            default:
+                precoIngresso = 0;
+                break;
+    }    
 
-switch(categoriaPrompt){
-    case '1':
-        ingressoDT = 660
-        break
-    case '2':
-        ingressoDT = 440
-        break
-    case '3':
-        ingressoDT = 330
-        break
-    case '4':
-        ingressoDT = 170
-        break
-}
+    case 'dt':
+        switch(categoriaPrompt){
+            case 1:
+                precoIngresso = 660;
+                break;
+            case 2:
+                precoIngresso = 440;
+                break;
+            case 3:
+                precoIngresso = 330;
+                break;
+            case 4:
+                precoIngresso = 170;
+                break;
+            default:
+                precoIngresso = 0;
+                break;
+    }        
 
-switch(categoriaPrompt){
-    case '1':
-        ingressoFI = 1980
-        break
-    case '2':
-        ingressoFI = 1320
-        break
-    case '3':
-        ingressoFI = 880
-        break
-    case '4':
-        ingressoFI = 330
-        break
-
+    case 'fi':
+        switch (categoriaPrompt) {
+            case 1:
+                precoIngresso = 1980;
+                break;
+            case 2:
+                precoIngresso = 1320;
+                break;
+            case 3:
+                precoIngresso = 880;
+                break;
+            case 4:
+                precoIngresso = 330;
+                break;
+            default:
+                precoIngresso = 0;
+                break;
+    }    
 }
 
 if (tipoDeJogoPrompt === 'in'){
-    ingressoDT * 0.24
-    ingressoFI * 0.24
-    ingressoSF * 0.24
+    precoIngresso = precoIngresso * 4.1
 }
 
-function calculaValorIngresso(etapaDoJogo, categoria, tipoDeJogo){
-    if (etapaDoJogo === 'sf' && categoria === '1'){
-        valorIngresso = 1320
-    }else if (etapaDoJogo === 'sf' && categoria === '2'){
-        valorIngresso = 880
-    }else if (etapaDoJogo === 'sf' && categoria === '3'){
-        valorIngresso = 550
-    }else if (etapaDoJogo === 'sf' && categoria === '4'){
-        valorIngresso = 220
-    }else if (etapaDoJogo === 'dt' && categoria === '1'){
-        valorIngresso = 660
-    }else if (etapaDoJogo === 'dt' && categoria === '2'){
-        valorIngresso = 440
-    }else if (etapaDoJogo === 'dt' && categoria === '3'){
-        valorIngresso = 330
-    }else if (etapaDoJogo === 'dt' && categoria === '4'){
-        valorIngresso = 170
-    }else if (etapaDoJogo === 'dt' && categoria === '3'){
-        valorIngresso = 330
-    }else if (etapaDoJogo === 'fi' && categoria === '1'){
-        valorIngresso = 1980
-    }else if (etapaDoJogo === 'fi' && categoria === '2'){
-        valorIngresso = 1320
-    }else if (etapaDoJogo === 'fi' && categoria === '3'){
-        valorIngresso = 880
-    }else if (etapaDoJogo === 'fi' && categoria === '4'){
-        valorIngresso = 330
-    }
-
-    if (tipoDeJogo === 'in'){
-            ingressoDT * 0.24
-            ingressoFI * 0.24
-            ingressoSF * 0.24
-    }
+let textoTipo;
+if (tipoDeJogoPrompt === "do") {
+  textoTipo = "Doméstico";
+} else if (tipoDeJogoPrompt === "in") {
+  textoTipo = "Internacional";
+} else {
+  textoTipo = "Erro";
 }
 
-function calcularRecibo(nomeUsuario, tipoDeJogo, etapaDoJogo, categoria, quantidadeDeIngressos){
-    console.log(`---Dados da compra---\nNome do cliente: ${nomeUsuario}\nTipo do Jogo: ${tipoDeJogo}\nEtapa do jogo: ${etapaDoJogo}\nCategoria: ${categoria}\nQuantidade de ingressos: ${quantidadeDeIngressos}\n---Valores---\n`)
+let textoEtapa;
+switch (etapaDoJogoPrompt) {
+  case "sf":
+    textoEtapa = "Semi-Final";
+    break;
+  case "dt":
+    textoEtapa = "Decisão Terceiro";
+    break;
+  case "fi":
+    textoEtapa = "Final";
+    break;
+  default:
+    textoEtapa = "Erro";
+    break;
 }
 
-calcularRecibo(nomeUsuarioPrompt, tipoDeJogoPrompt, etapaDoJogoPrompt, categoriaPrompt, quantidadeDeIngressosPrompt)
+console.log("---Dados da compra---")
+console.log("Nome do cliente:", nomeUsuarioPrompt)
+console.log("Tipo do jogo:", textoTipo)
+console.log("Etapa do jogo:", textoEtapa)
+console.log("Categoria:", categoriaPrompt)
+console.log("---Valores---")
+console.log("Valor do ingresso:", precoIngresso)
+console.log("Valor total da compra:", precoIngresso * quantidadeDeIngressosPrompt)
