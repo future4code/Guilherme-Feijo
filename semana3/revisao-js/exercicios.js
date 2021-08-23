@@ -144,8 +144,19 @@ function retornaPessoasNaoAutorizadas(pessoas) {
 
 // EXERCÍCIO 14
 function retornaContasComSaldoAtualizado(contas) {
+    const somar = (num1, num2) => num1 + num2
 
-}
+    contas.forEach(conta => {
+ 
+       const somaDosGastos = conta.compras.reduce(somar, 0)
+ 
+       conta.saldoTotal -= somaDosGastos
+ 
+       conta.compras = []
+    })
+ 
+    return contas
+}    
 
 // EXERCÍCIO 15A
 function retornaArrayOrdenadoAlfabeticamente(consultas) {
