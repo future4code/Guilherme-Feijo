@@ -1,0 +1,132 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+header{
+    background-color: cadetblue;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    padding: 10px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+input{
+    border-radius: 5px;
+    
+}
+
+
+main{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 15px;
+    margin-top: 10px;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.container-thumb{
+    box-shadow: 2px 2px 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: auto;
+    height: 200px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
+.container-thumb>h5{
+    margin: 5px;
+}
+
+a>img{
+    width: 100%;
+    
+}
+
+
+
+.container-thumb>img{
+    width: 100%;
+}
+
+footer{
+    background-color: cadetblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 60px;
+    padding: 10px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+
+.main-video{
+    background-color: black;
+    width: 100vw;
+    color: blanchedalmond;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+main h1{
+    padding-top: 13px;
+}
+
+main>video{
+    width: 800px;
+    margin: 10px;
+}
+
+
+@media screen and (min-device-width: 300px) and (max-device-width: 415px){
+    main{
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        height: fit-content;
+        margin-top: 4vh;
+        margin-bottom: 4vh;
+    }
+
+    .container-thumb{
+        margin: 2vh 1vw;
+        height: fit-content
+    }
+
+    .container-thumb>h5{
+        margin-top: 1vh;
+    }
+
+    footer{
+        
+        text-align: center;
+    }
+
+    .main-video{
+        height: 82vh;
+        margin-bottom: 0;
+    }
+
+    main>video{
+        width: 90vw;
+        margin: 10px;
+    }
+
+}
