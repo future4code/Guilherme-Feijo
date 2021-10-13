@@ -7,19 +7,10 @@ import HomePage from "./pages/HomePage";
 import ListTripsPage from "./pages/ListTripsPage";
 import LoginPage from "./pages/LoginPage";
 import TripDetailsPage from "./pages/TripDetailsPage";
+import Router from "./routes/Router";
 
 function App() {
-  return (
-    <div>
-      {/* <HomePage /> */}
-      <AdminHomePage />
-      <CreateTripPage />
-      <ApplicationFormPage />
-      <ListTripsPage />
-      <LoginPage />
-      <TripDetailsPage />
-    </div>
-  );
+  return <Router />;
 }
 
 export default App;
