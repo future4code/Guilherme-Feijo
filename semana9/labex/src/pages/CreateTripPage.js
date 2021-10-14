@@ -3,9 +3,12 @@ import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import useForm from "../hooks/UseForms";
+import useProtectedPage from "../hooks/UseProtectedPage";
 
 function CreateTripPage() {
   const history = useHistory();
+
+  useProtectedPage();
 
   const goBack = () => {
     history.goBack();
