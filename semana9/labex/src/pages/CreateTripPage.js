@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import useForm from "../hooks/UseForms";
 import useProtectedPage from "../hooks/UseProtectedPage";
 
 function CreateTripPage() {
   const history = useHistory();
-
+  const params = useParams();
   useProtectedPage();
 
   const goBack = () => {
@@ -36,13 +36,15 @@ function CreateTripPage() {
   const onClickButton = (event) => {
     event.preventDefault();
     clearFields();
+    const token = localStorage.getItem("token");
+    console.log(form);
     axios
       .post(
         "https://us-central1-labenu-apis.cloudfunctions.net/labeX/guilherme-feijo-maryam/trips",
         form,
         {
           headers: {
-            auth: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ik5XdklneE8ycVVmQnlLSFhiVkpCIiwiZW1haWwiOiJndGZlaWpvQGdtYWlsLmNvbSIsImlhdCI6MTYzNDE1MjM3M30.KHgRkDNarvnZfql8EWVv9__VuOT0OOWvbnyxeVLdw0A",
+            auth: token,
           },
         }
       )
@@ -51,6 +53,7 @@ function CreateTripPage() {
       })
       .catch((err) => {
         alert("Não foi possivel criar a viagem");
+        console.log(err.response);
       });
   };
 
@@ -69,9 +72,13 @@ function CreateTripPage() {
           title={"O nome deve ter no mínimo 5 caracteres"}
         />
 
-        <select value={form.planet} name="planet" onChange={onChange}>
+        <select name="planet" onChange={onChange}>
           {listPlanet.map((planet) => {
-            return <option value={planet}>{planet}</option>;
+            return (
+              <option key={planet} value={planet}>
+                {planet}
+              </option>
+            );
           })}
         </select>
 
@@ -82,7 +89,7 @@ function CreateTripPage() {
           placeholder={"Data do inicio da missão"}
           required
           type={"date"}
-          min={"2021-01-01"}
+          min={"2022-01-01"}
         />
 
         <input
@@ -102,7 +109,7 @@ function CreateTripPage() {
           onChange={onChange}
           placeholder={"Duração da missão em dias"}
           required
-          type="text"
+          type="number"
           pattern={"^.{50,}"}
           title={"A duração da missão deve ter no mínimo 50 dias"}
         />

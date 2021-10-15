@@ -15,7 +15,8 @@ function AdminHomePage() {
     history.goBack();
   };
 
-  const goToLoginPage = () => {
+  const logOut = () => {
+    window.localStorage.removeItem("token");
     history.push("/login");
   };
 
@@ -34,10 +35,27 @@ function AdminHomePage() {
       )
       .then((res) => {
         setTripsList(res.data.trips);
+        console.log(tripsList);
       })
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const deleteTrip = (id) => {
+    axios
+      .delete(
+        `https://us-central1-labenu-apis.cloudfunctions.net/labeX/guilherme-feijo-maryam/trips/${id}`,
+        {
+          headers: { auth: localStorage.getItem("token") },
+        }
+      )
+      .then(() => {
+        alert("Viagem deletada com sucesso!");
+        getTrips();
+        console.log(tripsList);
+      })
+      .catch((err) => alert(err.response.data.message));
   };
 
   useEffect(() => {
@@ -52,7 +70,7 @@ function AdminHomePage() {
           <h3 onClick={() => goToTripDetailsPage(t.id)} key={t.id}>
             {t.name}
           </h3>
-          <button>x</button>
+          <button onClick={() => deleteTrip(t.id)}>x</button>
         </div>
       );
     });
@@ -60,7 +78,7 @@ function AdminHomePage() {
   return (
     <div>
       <button onClick={goBack}>Voltar</button>
-      <button onClick={goToLoginPage}>LogOut</button>
+      <button onClick={logOut}>LogOut</button>
       <h1>Painel do Administrador</h1>
       <button onClick={goToCreateTripPage}>Criar Viagem</button>
       {tripsListComponents}
