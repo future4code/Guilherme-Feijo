@@ -50,3 +50,18 @@ export const signUp = (
       console.log(body);
     });
 };
+
+export const createComment = async (body, id, clear, getData) => {
+  try {
+    await axios.post(`${BASE_URL}/posts/${id}/comments`, body, {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    });
+    alert("Comentário realizado com sucesso");
+    // getData();
+    clear();
+  } catch (erro) {
+    alert(erro.response.data.message);
+  }
+};

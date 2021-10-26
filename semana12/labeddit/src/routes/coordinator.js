@@ -13,3 +13,7 @@ export const goToDetail = (history, id) => {
 export const goToSignUp = (history) => {
   history.push("/signup");
 };
+
+export const goToPost = (history, id) => {
+  history.push(`/Post/${id}`);
+};
