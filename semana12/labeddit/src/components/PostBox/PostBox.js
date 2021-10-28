@@ -11,7 +11,6 @@ import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 
 const PostBox = (props) => {
   const history = useHistory();
-
   const vote = async (direction) => {
     const body = {
       direction: direction,
@@ -23,8 +22,9 @@ const PostBox = (props) => {
           Authorization: localStorage.getItem("token"),
         },
       });
+      props.getPost();
     } catch (erro) {
-      console.log(erro.response.data);
+      console.log(erro, erro.message);
     }
   };
 

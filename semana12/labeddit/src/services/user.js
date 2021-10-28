@@ -2,56 +2,43 @@ import axios from "axios";
 import { BASE_URL } from "../constants/urls";
 import { goToFeed } from "../routes/coordinator";
 
-export const login = (
-  body,
-  clear,
-  history,
-  //   setRightButtonText
-  setIsLoading
-) => {
-  // setIsLoading(true);
+export const login = (body, clear, history, setIsLoading) => {
+  setIsLoading(true);
   axios
     .post(`${BASE_URL}/users/login`, body)
     .then((res) => {
       localStorage.setItem("token", res.data.token);
       clear();
-      // setIsLoading(false);
+      setIsLoading(false);
       goToFeed(history);
-      //   setRightButtonText("Logout");
     })
     .catch((err) => {
-      // setIsLoading(false);
+      setIsLoading(false);
       alert(err.response.data.message);
     });
 };
 
-export const signUp = (
-  body,
-  clear,
-  history
-  //   setRightButtonText
-  // setIsLoading
-) => {
-  // setIsLoading(true);
+export const signUp = (body, clear, history, setIsLoading) => {
+  setIsLoading(true);
   axios
     .post(`${BASE_URL}/users/signup`, body)
     .then((res) => {
       localStorage.setItem("token", res.data.token);
       clear();
-      // setIsLoading(false);
+      setIsLoading(false);
       goToFeed(history);
-      //   setRightButtonText("Logout");
       console.log(body);
     })
     .catch((err) => {
-      // setIsLoading(false);
+      setIsLoading(false);
       alert(err.response.data.message);
       console.log(err.response.data);
       console.log(body);
     });
 };
 
-export const createComment = async (body, id, clear, getData) => {
+export const createComment = async (body, id, clear, getData, setIsLoading) => {
+  setIsLoading(true);
   try {
     await axios.post(`${BASE_URL}/posts/${id}/comments`, body, {
       headers: {
@@ -59,9 +46,11 @@ export const createComment = async (body, id, clear, getData) => {
       },
     });
     alert("Comentário realizado com sucesso");
-    // getData();
+    getData();
     clear();
+    setIsLoading(false);
   } catch (erro) {
     alert(erro.response.data.message);
+    setIsLoading(false);
   }
 };

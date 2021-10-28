@@ -5,8 +5,10 @@ import Button from "@material-ui/core/Button";
 import useForm from "../../hooks/UseForm";
 import axios from "axios";
 import { BASE_URL } from "../../constants/urls";
+import { CircularProgress } from "@material-ui/core";
 
 const PostCreator = (props) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [form, onChangeInput, clearFields] = useForm({ body: "", title: "" });
   const onSubmitForm = (event) => {
     event.preventDefault();
@@ -14,6 +16,7 @@ const PostCreator = (props) => {
   };
 
   const createPost = () => {
+    setIsLoading(true);
     axios
       .post(`${BASE_URL}/posts`, form, {
         headers: {
@@ -25,10 +28,12 @@ const PostCreator = (props) => {
         alert("Seu post foi criado com sucesso!");
         clearFields();
         props.getPosts();
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err.response.data);
         console.log(form);
+        setIsLoading(false);
       });
   };
 
@@ -52,7 +57,11 @@ const PostCreator = (props) => {
           value={form.body}
         ></textarea>
         <Button variant={"contained"} color={"primary"} type={"submit"}>
-          Criar
+          {isLoading ? (
+            <CircularProgress color={"inherit"} size={24} />
+          ) : (
+            <>Criar Post</>
+          )}
         </Button>
       </form>
     </MainContainerCreatePost>

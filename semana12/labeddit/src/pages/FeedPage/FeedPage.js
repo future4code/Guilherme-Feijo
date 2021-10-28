@@ -1,34 +1,17 @@
 import { PostDiv } from "./styled";
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 import useProtectedPage from "../../hooks/UseProtectedPage";
 import useRequestData from "../../hooks/UseRequestData";
 import { BASE_URL } from "../../constants/urls";
 import PostCreator from "../../components/PostCreator/PostCreator";
 import PostBox from "../../components/PostBox/PostBox";
+import Loading from "../../components/Loading/Loading";
+import Header from "../../components/Header/Header";
 
 const FeedPage = () => {
   const [posts, getPosts] = useRequestData([], `${BASE_URL}/posts`);
-  console.log(posts);
   useProtectedPage();
 
-  // const getPosts = async () => {
-  //   try {
-  //     const response = await axios.get(`${BASE_URL}/posts`, {
-  //       headers: {
-  //         Authorization: localStorage.getItem("token"),
-  //       },
-  //     });
-  //     setPosts(response.data);
-  //   } catch (erro) {
-  //     console.log(erro.response.data.message);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getPosts();
-  // }, [posts.length]);
-  console.log(posts);
   const postComponents = posts.map((post) => {
     return (
       <PostBox
@@ -38,14 +21,18 @@ const FeedPage = () => {
         text={post.body}
         commentsCount={post.commentCount}
         votesCount={post.voteSum}
+        getPost={getPosts}
       />
     );
   });
 
   return (
     <div>
+      <Header />
       <PostCreator getPosts={getPosts} />
-      <PostDiv>{postComponents}</PostDiv>
+      <PostDiv>
+        {postComponents.length > 0 ? postComponents : <Loading />}
+      </PostDiv>
     </div>
   );
 };

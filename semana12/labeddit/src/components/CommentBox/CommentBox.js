@@ -3,6 +3,8 @@ import { BASE_URL } from "../../constants/urls";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import Button from "@material-ui/core/Button";
+import { useEffect } from "react";
+import { CommentContainer } from "./styled";
 
 const CommentBox = (props) => {
   const vote = async (direction) => {
@@ -23,7 +25,7 @@ const CommentBox = (props) => {
   };
 
   return (
-    <div>
+    <CommentContainer>
       <h3>{props.username}</h3>
       <p>{props.body}</p>
       <div>
@@ -35,7 +37,7 @@ const CommentBox = (props) => {
           <ArrowDownwardIcon />
         </Button>
       </div>
-    </div>
+    </CommentContainer>
   );
 };
 
