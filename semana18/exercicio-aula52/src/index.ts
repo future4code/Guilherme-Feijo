@@ -104,4 +104,12 @@ class Bank {
   constructor(accounts: UserAccount[]) {
     this.accounts = accounts;
   }
+
+  getAccounts(): UserAccount[] {
+    return this.accounts;
+  }
+
+  setAccounts(newAccount: UserAccount): void {
+    this.accounts.push(newAccount);
+  }
 }
