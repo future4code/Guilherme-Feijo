@@ -5,7 +5,7 @@ import { AuthenticationData } from "../services/Authenticator";
 export class UserDataBase extends BaseDataBase {
   public async createUser(user: User): Promise<void> {
     try {
-      await BaseDataBase.connection("lbn_user").insert({
+      await BaseDataBase.connection("cookenu_user").insert({
         id: user.getId(),
         name: user.getName(),
         email: user.getEmail(),
@@ -18,7 +18,7 @@ export class UserDataBase extends BaseDataBase {
 
   public async findUserByEmail(email: string): Promise<User> {
     try {
-      const user = await BaseDataBase.connection("lbn_user")
+      const user = await BaseDataBase.connection("cookenu_user")
         .select("*")
         .where({ email });
       return user[0] && User.toUserModel(user[0]);
@@ -29,10 +29,10 @@ export class UserDataBase extends BaseDataBase {
 
   public async getProfile(id1: AuthenticationData): Promise<User[]> {
     try {
-      const [user] = await BaseDataBase.connection("lbn_user")
+      const result = await BaseDataBase.connection("cookenu_user")
         .select("id", "name", "email")
         .where({ id: id1.id });
-      return user.map((u: {}) => User.toUserModel(u));
+      return result.map((user: any) => User.toUserModel(user));
     } catch (error: any) {
       throw new Error(error.sqlMessage || error.message);
     }

@@ -3,7 +3,7 @@ export class Recipe {
     private id: string,
     private title: string,
     private description: string,
-    private cratedAt: string
+    private date: Date
   ) {}
 
   public getId() {
@@ -16,10 +16,10 @@ export class Recipe {
     return this.description;
   }
   public getCreatedAt() {
-    return this.cratedAt;
+    return this.date;
   }
 
-  static toUserModel(data: any): Recipe {
-    return new Recipe(data.id, data.title, data.description, data.cratedAt);
+  static toRecipeModel(data: any): Recipe {
+    return new Recipe(data.id, data.title, data.description, data.date);
   }
 }
