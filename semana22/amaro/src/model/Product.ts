@@ -1,15 +1,23 @@
 export class Product {
-  constructor(private id: string, private name: string) {}
+  constructor(
+    private id: number,
+    private name: string,
+    private tags: string[]
+  ) {}
 
   static toProductModel(data: any): Product {
-    return new Product(data.id, data.name);
+    return new Product(data.id, data.name, data.tags);
   }
-}
 
-export class Tag {
-  constructor(
-    private id: string,
-    private id_product: string,
-    private name: string
-  ) {}
+  public getId() {
+    return this.id;
+  }
+
+  public getName() {
+    return this.name;
+  }
+
+  public getTags() {
+    return this.tags;
+  }
 }
