@@ -1,19 +1,19 @@
 import { Request, Response } from "express";
 import { ProductDataBase } from "../data/ProductDataBase";
 
-export async function getProductByName(req: Request, res: Response) {
+export async function getProductByTag(req: Request, res: Response) {
   try {
-    const { name } = req.params;
+    const { tag } = req.params;
 
-    if (!name) {
-      res.status(422).send("Nome não informado!").end;
+    if (!tag) {
+      res.status(422).send("Tag não informada!").end;
     }
 
     const productDataBase = new ProductDataBase();
-    const product = await productDataBase.findProductByName(name);
+    const product: any = await productDataBase.findProductByTag(tag);
 
     if (!product) {
-      res.status(404).send("Produto não encontrado!").end;
+      res.status(404).send("Nenhum produto corresponde a tag indicada").end;
     }
 
     const tags = product.map((produtoTag: any) => {

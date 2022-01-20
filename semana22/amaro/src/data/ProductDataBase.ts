@@ -54,8 +54,8 @@ export class ProductDataBase extends BaseDataBase {
     try {
       const product = await BaseDataBase.connection.raw(
         `select produto_amaro.id as id, produto_amaro.name as name, tags.name as tags from produto_amaro_tags 
-        inner join produto_amaro on produto_amaro_tags.name_produto_amaro = produto_amaro.id 
-        inner join tags on produto_amaro_tags.id_tags = tags.id where produto_amaro.name = ${name}`
+        inner join produto_amaro on produto_amaro_tags.id_produto_amaro = produto_amaro.id 
+        inner join tags on produto_amaro_tags.id_tags = tags.id where produto_amaro.name = "${name}"`
       );
       return product[0];
     } catch (error) {
@@ -65,12 +65,12 @@ export class ProductDataBase extends BaseDataBase {
 
   public async findProductByTag(tag: string): Promise<Product> {
     try {
-      const product = await BaseDataBase.connection(
-        "amaro_products inner join amaro_tags"
-      )
-        .select("name_product")
-        .where({ tag });
-      return Product.toProductModel(product[0]);
+      const product = await BaseDataBase.connection.raw(
+        `select produto_amaro.id as id, produto_amaro.name as name, tags.name as tags from produto_amaro_tags 
+        inner join produto_amaro on produto_amaro_tags.id_produto_amaro = produto_amaro.id 
+        inner join tags on produto_amaro_tags.id_tags = tags.id where tags.name = "${tag}"`
+      );
+      return product[0];
     } catch (error) {
       throw new Error(error.sqlMessage || error.message);
     }
