@@ -53,7 +53,9 @@ export class ProductDataBase extends BaseDataBase {
   public async findProductByName(name: string): Promise<any> {
     try {
       const product = await BaseDataBase.connection.raw(
-        `select produto_amaro.id as id, produto_amaro.name as name, tags.name as tags from produto_amaro_tags inner join produto_amaro on produto_amaro_tags.id_produto_amaro = produto_amaro.id inner join tags on produto_amaro_tags.id_tags = tags.id where produto_amaro.name = ${name}`
+        `select produto_amaro.id as id, produto_amaro.name as name, tags.name as tags from produto_amaro_tags 
+        inner join produto_amaro on produto_amaro_tags.name_produto_amaro = produto_amaro.id 
+        inner join tags on produto_amaro_tags.id_tags = tags.id where produto_amaro.name = ${name}`
       );
       return product[0];
     } catch (error) {
