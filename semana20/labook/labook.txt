@@ -1,0 +1,73 @@
+LABOOK
+
+ESTRUTURA DE DADOS
+
+  usuarios
+    id
+    nome
+    email
+    senha
+
+  posts
+    idUsuario (FK)
+    id
+    foto
+    descricao
+    dataCriacao
+    tipo: "normal" | "evento"
+    
+  curtidas
+    idUsuario (FK)
+    idPost (FK)
+
+  comentarios
+    id
+    idUsuario (FK)
+    idPost (FK)
+    texto
+
+FUNCIONALIDADES
+
+  cadastrar: (dadosUsuario) => token
+
+  logar: userCredentials => token
+
+  criarPost: (dadosPost, token) => mensagem
+
+  buscarPostPorId: id => post
+
+
+BANCO DE DADOS
+
+  CREATE TABLE labook_users (
+    id VARCHAR(255) PRIMARY KEY,
+      nome VARCHAR(255) NOT NULL,
+      email VARCHAR(255) UNIQUE NOT NULL,
+      senha VARCHAR(255) NOT NULL
+  );
+
+  CREATE TABLE labook_posts (
+    id VARCHAR(255) PRIMARY KEY,
+      foto VARCHAR(255) NOT NULL,
+      descricao VARCHAR(255) NOT NULL,
+      dataCriacao DATETIME NOT NULL,
+      tipo ENUM ("NORMAL" , "EVENT") DEFAULT "NORMAL",
+      userId VARCHAR(255),
+      FOREIGN KEY (userId) REFERENCES labook_users(id)
+  );
+
+  INSERT INTO labook_users VALUES(
+    "b7a0be74-5652-4871-a4fa-5ac3b3332b7a",
+      "Alice",
+      "alice@gmail.com",
+      "$2a$12$G6OCZ9F5KxV2oxHmBCr7q.SVffRG8jWDb9STGgb.yeaWLRfrbv5mG"
+  );
+
+  INSERT INTO labook_posts VALUES(
+    "d54bdc68-8e6c-4bb6-9d9f-2d87337aab55",
+      "https://i.picsum.photos/id/64/200/200.jpg?hmac=lJVbDn4h2axxkM72s1w8X1nQxUS3y7li49cyg0tQBZU",
+      "I love flowers",
+      CURRENT_TIMESTAMP,
+      "NORMAL",
+      "b7a0be74-5652-4871-a4fa-5ac3b3332b7a"
+  );
